@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
         child: Column(
           children: [
             // SizedBox(height: 20),
@@ -43,51 +43,51 @@ class HomePage extends StatelessWidget {
                   }
 
                   return ListView(
-                    children: [
-                    const SizedBox(height: 20),
-                    ...snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-                      return Card(
-                        clipBehavior: Clip.antiAlias,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Ink.image(
-                              image: NetworkImage(data['imageurl']),
-                              fit: BoxFit.cover,
-                              height: 240,
-                              child: Container(
-                                color: Colors.black.withOpacity(0.6),
-                              ),
+                      children: [
+                        const SizedBox(height: 20),
+                        ...snapshot.data!.docs.map((DocumentSnapshot document) {
+                          Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                          return Card(
+                            clipBehavior: Clip.antiAlias,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
+                            child: Stack(
+                              alignment: Alignment.center,
                               children: [
-                                Text(
-                                  data['name'],
-                                  style: const TextStyle(
-                                    color: Colors.amberAccent,
-                                    fontSize: 48,
-                                    fontWeight: FontWeight.bold,
+                                Ink.image(
+                                  image: NetworkImage(data['imageurl']),
+                                  fit: BoxFit.cover,
+                                  height: 240,
+                                  child: Container(
+                                    color: Colors.black.withOpacity(0.6),
                                   ),
                                 ),
-                                Text(
-                                  '\₹${data['price']}',
-                                  style: const TextStyle(
-                                    color: Colors.greenAccent,
-                                    fontSize: 36,
-                                  ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      data['name'],
+                                      style: const TextStyle(
+                                        color: Colors.amberAccent,
+                                        fontSize: 48,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      '\₹${data['price']}',
+                                      style: const TextStyle(
+                                        color: Colors.greenAccent,
+                                        fontSize: 36,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ]
+                          );
+                        }).toList(),
+                      ]
                   );
                 },
               ),
