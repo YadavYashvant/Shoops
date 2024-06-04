@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
             ),
             */
             const SizedBox(
-              height: 32,
+              height: 18,
             ),
             ...List.generate(10, (index) {
               return Padding(
@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
                             'Description of the item goes here.',
                             style: TextStyle(
                               fontSize: 15,
-                              color: Colors.green,
+                              // color: Colors.green,
                             ), //Textstyle
                           ), //Text
                           const SizedBox(
