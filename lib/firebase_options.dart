@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'fieries-1b223.appspot.com',
     iosBundleId: 'com.example.firebaseFirestoreApp',
   );
+
 }
