@@ -52,14 +52,14 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                   ),
                 ),
                 const SizedBox(height: 20),
                 TextField(
                   controller: passwordController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                   ),
                 ),

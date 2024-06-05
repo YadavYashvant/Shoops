@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_firestore_app/components/primary_btn.dart';
+import 'package:firebase_firestore_app/components/secondary_btn.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,16 +21,16 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.amberAccent[400],
         centerTitle: true,
-        title: Text('Grocery Store'),
+        title: const Text('Grocery Store'),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: () => signOut(context),
           ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
         child: Column(
           children: [
             // SizedBox(height: 20),
@@ -47,44 +51,73 @@ class HomePage extends StatelessWidget {
                         const SizedBox(height: 20),
                         ...snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-                          return Card(
-                            clipBehavior: Clip.antiAlias,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Ink.image(
-                                  image: NetworkImage(data['imageurl']),
-                                  fit: BoxFit.cover,
-                                  height: 240,
-                                  child: Container(
-                                    color: Colors.black.withOpacity(0.6),
-                                  ),
+                          return Column(
+                            children: [
+                              Card(
+                                elevation: 10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                // surfaceTintColor: Colors.greenAccent,
+                                color: Colors.green,
+                                child: Column(
                                   children: [
-                                    Text(
-                                      data['name'],
-                                      style: const TextStyle(
-                                        color: Colors.amberAccent,
-                                        fontSize: 48,
-                                        fontWeight: FontWeight.bold,
+                                    Card(
+                                      clipBehavior: Clip.antiAlias,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Ink.image(
+                                            image: NetworkImage(data['imageurl']),
+                                            fit: BoxFit.cover,
+                                            height: 240,
+                                            child: Container(
+                                              color: Colors.black.withOpacity(0.6),
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                data['name'],
+                                                style: const TextStyle(
+                                                  color: Colors.amberAccent,
+                                                  fontSize: 48,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                '\₹ ${data['price']}',
+                                                style: const TextStyle(
+                                                  color: Colors.greenAccent,
+                                                  fontSize: 36,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Text(
-                                      '\₹${data['price']}',
-                                      style: const TextStyle(
-                                        color: Colors.greenAccent,
-                                        fontSize: 36,
+
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: PrimaryButton(
+                                        onPressed: () {
+                                          print('Add to cart');
+                                        },
+                                        text: 'Add to cart',
                                       ),
-                                    ),
+
+                                    )
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(height: 16),
+                            ],
                           );
                         }).toList(),
                       ]
