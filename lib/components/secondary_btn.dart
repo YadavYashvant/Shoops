@@ -20,7 +20,7 @@ class SecondaryButton extends StatelessWidget {
       },
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.purpleAccent,
           fontSize: 18,
           fontWeight: FontWeight.w600,
