@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Firestore App',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
               home: GreetingPage(),
               routes: {
                 '/greeting': (context) => const GreetingPage(),

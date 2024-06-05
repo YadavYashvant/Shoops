@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_firestore_app/components/custom_btn.dart';
 import 'package:flutter/material.dart';
@@ -8,22 +9,73 @@ class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> signIn() async {
+  Future<void> signIn(context) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
-      print("User signed in: ${userCredential.user}");
+
+      final snackBar = SnackBar(
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'Oh Hey!! 🥳',
+          message:
+          "User signed in: ${userCredential.user}",
+          contentType: ContentType.success,
+          // to configure for material banner
+          inMaterialBanner: false,
+        )
+      );
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(snackBar);
+
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        final snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Oh Hey!! 🥳',
+            message:
+            "The password provided is too weak.",
+            contentType: ContentType.failure,
+            // to configure for material banner
+            inMaterialBanner: false,
+          ),
+        );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
+        // print('The password provided is too weak.');
       }
     } catch (e) {
-      print(e);
+      final snackBar = SnackBar(
+        /// need to set following properties for best effect of awesome_snackbar_content
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          title: 'Oh Hey!! 🥳',
+          message:
+          "An error occurred while signing in.",
+          contentType: ContentType.failure,
+          // to configure for material banner
+          inMaterialBanner: false,
+        ),
+      );
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(snackBar);
     }
   }
 
@@ -66,7 +118,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 CustomButton(
                   onPressed: () {
-                    signIn();
+                    signIn(context);
                     Navigator.pushNamed(context, '/home');
                   },
                   text: 'Sign In',

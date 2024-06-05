@@ -1,5 +1,6 @@
 import 'package:firebase_firestore_app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     super.key,
@@ -13,10 +14,10 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: black2,
-        surfaceTintColor: black2,
+        backgroundColor: brightGreyColor,
+        surfaceTintColor: brightGreyColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       onPressed: () {
@@ -24,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
       },
       child: Text(
         text,
-        style: const TextStyle(
+        style: GoogleFonts.poppins(
           color: Colors.white,
           fontSize: 28,
           fontWeight: FontWeight.w600,
